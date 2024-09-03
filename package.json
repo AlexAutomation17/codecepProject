@@ -10,12 +10,17 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@faker-js/faker": "^8.4.1",
     "codeceptjs": "^3.6.5",
     "cucumber": "^6.0.7",
-    "playwright": "^1.46.1"
+    "joi": "^17.13.3",
+    "mocha": "^10.7.3",
+    "playwright": "^1.46.1",
+    "soft-assert": "^0.2.7"
   },
   "devDependencies": {
     "@types/node": "^22.5.1",
+    "dotenv": "^16.4.5",
     "ts-node": "^10.9.2",
     "typescript": "^5.5.4"
   }

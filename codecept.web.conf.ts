@@ -1,16 +1,21 @@
+import dotenv from 'dotenv';
+
+dotenv.config();
+
 exports.config = {
     output: './output',
     helpers: {
       Playwright: {
         browser: 'chromium',
-        url: 'http://localhost',
+        url: process.env.AUTOMATION_WEB_URL,
         show: true
       },
       JSONResponse: {
       }
     },
     include: {
-      I: './steps_file'
+      I: './steps_file',
+      WebLoginPage: './pages/paylocity/loginPage.ts'
     },
     mocha: {},
     bootstrap: null,

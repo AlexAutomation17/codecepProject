@@ -1,19 +1,29 @@
+import dotenv from "dotenv";
+dotenv.config();
+
 exports.config = {
-  output: './output',
+  output: "./output",
   helpers: {
     Playwright: {
-      browser: 'chromium',
-      url: 'http://localhost',
-      show: true
+      browser: "chromium",
+      url: process.env.AUTOMATION_WEB_URL,
+      show: false,
+      ignoreHTTPSErrors: true,
+      waitForTimeout: 10000,
+      getPageTimeout: 20000,
     },
     REST: {
-      endpoint: 'https://swapi.dev/api'
+      endpoint: "https://swapi.dev/api",
+      timeout: 150000,
     },
-    JSONResponse: {
-    }
+    JSONResponse: {},
   },
   include: {
-    I: './steps_file'
+    I: "./steps_file",
+    WebLoginPage: "./pages/paylocity/loginPage.ts",
+    DashBoardPage: "./pages/paylocity/dashBoardPage.ts",
+    EmployeePage: "./pages/paylocity/employeePage.ts",
+    PaylocityServices: "./services/paylocity/Functions/paylocityServices.ts"
   },
   mocha: {},
   bootstrap: null,
@@ -21,37 +31,38 @@ exports.config = {
   teardown: null,
   hooks: [],
   gherkin: {
-    features: './features/*.feature',
-    steps: ['./step_definitions/steps.ts']
+    features: "./features/*.feature",
+    steps: ["./step_definitions/steps.ts"],
   },
   plugins: {
     screenshotOnFail: {
-      enabled: true
+      enabled: false,
     },
     tryTo: {
-      enabled: true
+      enabled: true,
     },
     retryFailedStep: {
-      enabled: true
+      enabled: true,
     },
     retryTo: {
-      enabled: true
+      enabled: true,
     },
     eachElement: {
-      enabled: true
+      enabled: true,
     },
-    pauseOnFail: {}
+    pauseOnFail: {},
   },
   stepTimeout: 0,
-  stepTimeoutOverride: [{
-      pattern: 'wait.*',
-      timeout: 0
+  stepTimeoutOverride: [
+    {
+      pattern: "wait.*",
+      timeout: 0,
     },
     {
-      pattern: 'amOnPage',
-      timeout: 0
-    }
+      pattern: "amOnPage",
+      timeout: 0,
+    },
   ],
-  tests: './*_test.ts',
-  name: 'githubTest'
-}
+  tests: "./*_test.ts",
+  name: "githubTest",
+};
